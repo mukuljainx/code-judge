@@ -6,7 +6,7 @@ axios.interceptors.request.use((config) => {
 
   return {
     ...config,
-    baseURL: process.env.API_URL,
+    baseURL: "http://54.226.177.73:4059",
     headers: {
       ...config.headers,
     },
