@@ -19,6 +19,12 @@ const AddVideoWrapper = styled.div<{ show: boolean }>`
   position: absolute;
   width: calc(100% - 32px);
   transition: all 0.7s linear;
+  overflow: hidden;
+  height: 0;
+  ${({ show }) =>
+    show &&
+    `overflow: auto;
+    height: auto;`};
   ${({ show }) => `left: ${show ? "16px" : "-100%"}`};
 `;
 
@@ -27,6 +33,12 @@ const CombineVideoWrapper = styled.div<{ show: boolean }>`
   width: calc(100% - 32px);
   transition: all 0.7s linear;
   left: 100%;
+  overflow: hidden;
+  height: 0;
+  ${({ show }) =>
+    show &&
+    `overflow: auto;
+    height: auto;`};
   ${({ show }) => `left: ${show ? "16px" : "100%"}`};
 `;
 

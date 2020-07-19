@@ -57,7 +57,6 @@ const copyToClipboard = (str: string) => {
 };
 
 const validateVideoRow = (values: IFormValues) => {
-  debugger;
   if (!values.segments) {
     return true;
   }
@@ -92,6 +91,12 @@ const CombineVideo = ({ changeScreen, videosURL }: IProps) => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>("");
   const [combinedVideo, setCombinedVideo] = React.useState<string>("");
+
+  React.useEffect(() => {
+    if (combinedVideo) {
+      document.querySelector(".combined-video")?.scrollIntoView();
+    }
+  }, [combinedVideo]);
 
   const onSubmit = handleSubmit((data) => {
     setLoading(true);
@@ -217,7 +222,17 @@ const CombineVideo = ({ changeScreen, videosURL }: IProps) => {
       {combinedVideo && (
         <>
           <h3>Combined Video:</h3>
-          <Video src={combinedVideo} controls style={{ width: "100%" }}></Video>
+          <Video
+            className="combined-video"
+            controls
+            style={{ height: "100%", minHeight: 480 }}
+          >
+            <source
+              className="combined-video-source"
+              src={combinedVideo}
+              type="video/mp4"
+            ></source>
+          </Video>
         </>
       )}
     </Wrapper>
