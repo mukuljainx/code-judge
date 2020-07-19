@@ -5,7 +5,6 @@ import { ScreenType } from "../interfaces";
 import AddVideo from "./add-video";
 import CombineVideo from "./combine-video";
 import Card from "../components/card";
-import { IResponse } from "../service/video-segment";
 
 const Wrapper = styled.div`
   padding: 16px;
@@ -39,7 +38,7 @@ const App = () => {
 
   return (
     <Wrapper>
-      <Card width="60%" height="80%" style={{ position: "relative" }}>
+      <Card width="80%" height="90%" style={{ position: "relative" }}>
         <AddVideoWrapper show={screen === "AddVideo"}>
           <AddVideo changeScreen={setScreen} setVideosURL={setVideosURL} />
         </AddVideoWrapper>

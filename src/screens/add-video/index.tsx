@@ -1,14 +1,14 @@
 import * as React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { useForm } from "react-hook-form";
 
 import { ScreenType, SettingType } from "../../interfaces";
 import RangeSetting from "./rangeSetting";
 import Input from "../../components/input";
-import Icon from "../../components/icon";
 import Button from "../../components/button";
 import Select from "../../components/select";
 import segmentAPI from "../../service/video-segment";
+import LoadingIcon from "../../components/loadingIcon";
 import { VideosType } from "../";
 
 const Wrapper = styled.div``;
@@ -21,19 +21,6 @@ const Field = styled.div`
 
 const Text = styled.p`
   color: ${({ theme }) => theme.colors.alert};
-`;
-
-const rotation = keyframes`
-from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-`;
-
-const LoadingIcon = styled(Icon)`
-  animation: ${rotation} 2s infinite linear;
 `;
 
 interface IProps {
@@ -86,7 +73,7 @@ const AddVideo = ({ changeScreen, setVideosURL }: IProps) => {
   const { handleSubmit, register, control, watch, errors, getValues } = useForm<
     FormValues
   >({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
   const setting = watch("setting", options[0].value);
@@ -123,6 +110,7 @@ const AddVideo = ({ changeScreen, setVideosURL }: IProps) => {
 
   return (
     <Wrapper>
+      <h3>Segment Video</h3>
       <Form onSubmit={onSubmit}>
         <Field>
           <Input
@@ -132,7 +120,7 @@ const AddVideo = ({ changeScreen, setVideosURL }: IProps) => {
             itemRef={register({
               required: "Required",
               pattern: {
-                value: /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi,
+                value: /[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_+.~#?&//=]*)?/gi,
                 message: "invalid email address",
               },
             })}

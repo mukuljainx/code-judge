@@ -1,12 +1,9 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios from "axios";
 
 axios.interceptors.request.use((config) => {
-  // when we are running inside engine
-  const token = localStorage.getItem("user.auth.token");
-
   return {
     ...config,
-    baseURL: "http://54.226.177.73:4059",
+    baseURL: "http://54.83.114.188:4059",
     headers: {
       ...config.headers,
     },
